@@ -8,7 +8,8 @@
 import Foundation
 
 struct Task {
-    var title: String
+    let title: String
     var description: String?
+    var location: Location?
     private(set) var date = Date()
 }
