@@ -7,9 +7,18 @@
 
 import Foundation
 
-struct Task {
+struct Task: Equatable {
     let title: String
     var description: String?
     var location: Location?
     private(set) var date = Date()
+    
+    static func == (lhs: Task, rhs: Task) -> Bool {
+        let topDateBorder = lhs.date.addingTimeInterval(10)
+        let bottomDateBorder = lhs.date.addingTimeInterval(-10)
+        return lhs.title == rhs.title &&
+            lhs.description == rhs.description &&
+            lhs.location == rhs.location &&
+            (rhs.date > bottomDateBorder && rhs.date < topDateBorder)
+    }
 }
