@@ -20,16 +20,22 @@
                                 <rect key="frame" x="-5" y="0.0" width="419" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="pqV-FR-v26" id="x8D-Uh-dY5"/>
+                                    <outlet property="delegate" destination="pqV-FR-v26" id="X3m-OS-NSu"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="dataProvider" destination="pqV-FR-v26" id="pj7-cx-txC"/>
                         <outlet property="tableView" destination="j1b-pz-KD0" id="cWZ-c0-1Jj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <customObject id="pqV-FR-v26" customClass="DataProvider" customModule="ToDoApp" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-223.18840579710147" y="137.94642857142856"/>
         </scene>
