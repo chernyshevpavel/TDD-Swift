@@ -15,6 +15,7 @@ class DataProviderTests: XCTestCase {
     
     override func setUpWithError() throws {
         sut = DataProvider()
+        sut.taskManager = TaskManager()
         tableView = UITableView()
         tableView.dataSource = sut
     }
@@ -30,8 +31,6 @@ class DataProviderTests: XCTestCase {
     }
     
     func testNumberOfRowsInSectionZeroIsTaskCount() {
-        sut.taskManager = TaskManager()
-        
         sut.taskManager?.add(task: Task(title: "Foo"))
         
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), 1)
@@ -44,4 +43,31 @@ class DataProviderTests: XCTestCase {
         XCTAssertEqual(tableView.numberOfRows(inSection: 0), 2)
     }
 
+    
+    func testNumberOfRowsInSectionOnIsDoneTasksCount() {
+        sut.taskManager?.add(task: Task(title: "Foo"))
+        sut.taskManager?.add(task: Task(title: "Bar"))
+        
+        XCTAssertEqual(tableView.numberOfRows(inSection: 1), 0)
+        
+        sut.taskManager?.checkTask(at: 0)
+        tableView.reloadData()
+        
+        XCTAssertEqual(tableView.numberOfRows(inSection: 1), 1)
+        
+        sut.taskManager?.checkTask(at: 0)
+        tableView.reloadData()
+        
+        XCTAssertEqual(tableView.numberOfRows(inSection: 1), 2)
+    }
+
+    func testCellForRowAtIndexPathRetutnsTaskCell() {
+        sut.taskManager?.add(task: Task(title: "Foo"))
+        tableView.reloadData()
+        
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+        
+        XCTAssertTrue(cell is TaskCell)
+    }
+    
 }
