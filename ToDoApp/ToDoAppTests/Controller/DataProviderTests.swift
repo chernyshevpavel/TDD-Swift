@@ -70,4 +70,18 @@ class DataProviderTests: XCTestCase {
         XCTAssertTrue(cell is TaskCell)
     }
     
+    func testCellForRowAtIndexPathDequeuesCellFromTableView() {
+        
+    }
+}
+
+extension DataProviderTests {
+    class MockTableView: UITableView {
+        var cellIsDequeued = false
+        
+        override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
+            cellIsDequeued = true
+            return super.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        }
+    }
 }
