@@ -38,7 +38,10 @@ extension DataProvider: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        TaskCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TaskCell.self), for: indexPath) as? TaskCell else {
+            fatalError("couldn't cast cell to TaskCell")
+        }
+        return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
