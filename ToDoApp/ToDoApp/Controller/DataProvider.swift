@@ -41,6 +41,9 @@ extension DataProvider: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TaskCell.self), for: indexPath) as? TaskCell else {
             fatalError("couldn't cast cell to TaskCell")
         }
+        if let task = taskManager?.task(at: indexPath.row) {
+            cell.configure(withTask: task)
+        }
         return cell
     }
     
