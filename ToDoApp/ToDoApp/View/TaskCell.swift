@@ -14,15 +14,21 @@ class TaskCell: UITableViewCell {
     
     var dateFormater: DateFormatter?
     
-    func configure(withTask task: Task) {
-        titleLabel.text = task.title
-        if let location = task.location {
-            locationLabel.text = location.name
-        }
+    func configure(withTask task: Task, done: Bool = false) {
         
-        let df = dateFormater ?? getDefaultDateFormater()
-        dateLabel.text = df.string(from: task.date)
+        if done {
+            let attributedString = NSAttributedString(string: task.title, attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue])
+            titleLabel.attributedText = attributedString
+            locationLabel = nil
+            dateLabel = nil
+        } else {
+            let df = dateFormater ?? getDefaultDateFormater()
+            dateLabel.text = df.string(from: task.date)
+            titleLabel.text = task.title
+            locationLabel.text = task.location?.name
+        }
     }
+
     
     private func getDefaultDateFormater() -> DateFormatter {
         let df = DateFormatter()

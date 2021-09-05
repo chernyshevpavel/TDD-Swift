@@ -48,9 +48,14 @@ class TaskCellTests: XCTestCase {
         XCTAssertTrue(cell.dateLabel.isDescendant(of: cell.contentView))
     }
     
-    func testConfigureSetsTitle() {
+    func configureCellWithTask(done: Bool = false) -> Task {
         let task = Task(title: "Foo")
-        cell.configure(withTask: task)
+        cell.configure(withTask: task, done: done)
+        return task
+    }
+    
+    func testConfigureSetsTitle() {
+        let task = configureCellWithTask()
         XCTAssertEqual(cell.titleLabel.text, task.title)
     }
     
@@ -61,13 +66,29 @@ class TaskCellTests: XCTestCase {
     }
     
     func testConfiguteSetsDate() {
-        let task = Task(title: "Foo")
-        cell.configure(withTask: task)
+        let task = configureCellWithTask()
         
         let dateFormater = DateFormatter()
         dateFormater.dateFormat = "dd.MM.yy"
         
         XCTAssertEqual(cell.dateLabel.text, dateFormater.string(from: task.date))
+    }
+    
+    func testDoneTaskShouldStrikeThrough() {
+        _ = configureCellWithTask(done: true)
+        
+        let attributedString = NSAttributedString(string: "Foo", attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue])
+        XCTAssertEqual(cell.titleLabel.attributedText, attributedString)
+    }
+    
+    func testDoneTaskDateLabelEqualsNil() {
+        _ = configureCellWithTask(done: true)
+        XCTAssertNil(cell.dateLabel)
+    }
+    
+    func testDoneTaskLocationLabelEqualsNil() {
+        _ = configureCellWithTask(done: true)
+        XCTAssertNil(cell.locationLabel)
     }
 }
 
