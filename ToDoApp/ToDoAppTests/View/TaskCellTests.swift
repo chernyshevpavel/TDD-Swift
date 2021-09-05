@@ -87,7 +87,7 @@ class TaskCellTests: XCTestCase {
     }
     
     func testDoneTaskLocationLabelEqualsNil() {
-        _ = configureCellWithTask(done: true)
+        _ =  configureCellWithTask(done: true)
         XCTAssertNil(cell.locationLabel)
     }
 }
