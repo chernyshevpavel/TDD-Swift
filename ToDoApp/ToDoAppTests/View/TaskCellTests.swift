@@ -39,6 +39,36 @@ class TaskCellTests: XCTestCase {
     func testCellHasTitleLocationInContentView() {
         XCTAssertTrue(cell.locationLabel.isDescendant(of: cell.contentView))
     }
+    
+    func testCellHasDateLabel() {
+        XCTAssertNotNil(cell.dateLabel)
+    }
+    
+    func testCellHasDateLocationInContentView() {
+        XCTAssertTrue(cell.dateLabel.isDescendant(of: cell.contentView))
+    }
+    
+    func testConfigureSetsTitle() {
+        let task = Task(title: "Foo")
+        cell.configure(withTask: task)
+        XCTAssertEqual(cell.titleLabel.text, task.title)
+    }
+    
+    func testConfigureSetsLocation() {
+        let task = Task(title: "Foo", location: Location(name: "Bar", coordinate: nil))
+        cell.configure(withTask: task)
+        XCTAssertEqual(cell.locationLabel.text, task.location?.name)
+    }
+    
+    func testConfiguteSetsDate() {
+        let task = Task(title: "Foo")
+        cell.configure(withTask: task)
+        
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "dd.MM.yy"
+        
+        XCTAssertEqual(cell.dateLabel.text, dateFormater.string(from: task.date))
+    }
 }
 
 extension TaskCellTests {
