@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import ToDoApp
 
 class DetailViewControllerTests: XCTestCase {
@@ -27,6 +28,11 @@ class DetailViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.titleLabel.isDescendant(of: sut.view))
     }
     
+    func testHasLocationLabel() {
+        XCTAssertNotNil(sut.locationLabel)
+        XCTAssertTrue(sut.locationLabel.isDescendant(of: sut.view))
+    }
+    
     func testHasDescriptionLabel() {
         XCTAssertNotNil(sut.descriptionLabel)
         XCTAssertTrue(sut.descriptionLabel.isDescendant(of: sut.view))
@@ -42,4 +48,35 @@ class DetailViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut.mapView)
         XCTAssertTrue(sut.mapView.isDescendant(of: sut.view))
     }
+    
+    func setUpTaskANdAppearanceTransition() {
+        let coordinte = CLLocationCoordinate2D(latitude: 59.93980483, longitude: 30.31479836)
+        let location = Location(name: "Baz", coordinate: coordinte)
+        let date = Date(timeIntervalSince1970: 1630789200)
+        let task = Task(title: "Foo", description: "Bar", location: location, date: date)
+        
+        sut.task = task
+        
+        sut.beginAppearanceTransition(true, animated: true)
+        sut.endAppearanceTransition()
+    }
+    
+    func testSettingTaskSetsTitleLabel() {
+        setUpTaskANdAppearanceTransition()
+        
+        XCTAssertEqual(sut.titleLabel.text, "Foo")
+    }
+    
+    func testSettingTaskSetsDescriptionLabel() {
+        setUpTaskANdAppearanceTransition()
+        
+        XCTAssertEqual(sut.descriptionLabel.text, "Bar")
+    }
+    
+    func testSettingTaskSetsLocationLabel() {
+        setUpTaskANdAppearanceTransition()
+        
+        XCTAssertEqual(sut.locationLabel.text, "Baz")
+    }
+
 }
