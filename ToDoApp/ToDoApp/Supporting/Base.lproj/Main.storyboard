@@ -172,14 +172,17 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5E-tV-Z48">
-                                <rect key="frame" x="184" y="478" width="46" height="30"/>
+                                <rect key="frame" x="190" y="478" width="34" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="save" destination="pWX-Sz-Yix" eventType="touchUpInside" id="yMo-OP-jWg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmZ-q5-Evl">
-                                <rect key="frame" x="184" y="531" width="46" height="30"/>
+                                <rect key="frame" x="183" y="531" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Cancel"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tAP-0t-oOr"/>

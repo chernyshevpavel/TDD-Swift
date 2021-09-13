@@ -23,7 +23,7 @@ class NewTaskViewController: UIViewController {
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
     
-    func save(completionHandler: @escaping () -> Void) {
+    @IBAction func save() {
         let titleString = titleTextfield.text ?? ""
         let locationString = locationTextfield.text ?? ""
         let df = dateFormater ?? getDefaultDateFormater()
@@ -34,7 +34,6 @@ class NewTaskViewController: UIViewController {
         geocoder.geocodeAddressString(addressString) { [unowned self] placemarks, error in
             guard error == nil else {
                 print(error ?? "")
-                completionHandler()
                 return
             }
             let placemark = placemarks?.first
@@ -43,11 +42,9 @@ class NewTaskViewController: UIViewController {
             if let date = date {
                 let task = Task(title: titleString, description: descriptionString, location: location, date: date)
                 self.taskManager.add(task: task)
-                completionHandler()
             } else {
                 let task = Task(title: titleString, description: descriptionString, location: location)
                 self.taskManager.add(task: task)
-                completionHandler()
             }
         }
     }
