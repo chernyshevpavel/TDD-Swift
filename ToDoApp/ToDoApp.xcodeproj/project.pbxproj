@@ -27,6 +27,7 @@
 		1DB290822655A92100B49B8B /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB290812655A92100B49B8B /* TaskCell.swift */; };
 		1DBB603D26F12D51003249FE /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBB603C26F12D51003249FE /* APIClientTests.swift */; };
 		1DBB603F26F12D74003249FE /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBB603E26F12D74003249FE /* APIClient.swift */; };
+		1DBB604226F1312D003249FE /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBB604126F1312D003249FE /* String+Extensions.swift */; };
 		1DC10A4526545D0700C98E49 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC10A4426545D0700C98E49 /* DataProvider.swift */; };
 		1DD05A92263C99FF004D7C22 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD05A91263C99FF004D7C22 /* Location.swift */; };
 		1DD05A97263C9AE0004D7C22 /* LocationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD05A96263C9AE0004D7C22 /* LocationTest.swift */; };
@@ -78,6 +79,7 @@
 		1DB290812655A92100B49B8B /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		1DBB603C26F12D51003249FE /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		1DBB603E26F12D74003249FE /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		1DBB604126F1312D003249FE /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1DC10A4426545D0700C98E49 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		1DD05A91263C99FF004D7C22 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		1DD05A96263C9AE0004D7C22 /* LocationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTest.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		1D0AADFD2639F2E700CB44F5 /* ToDoApp */ = {
 			isa = PBXGroup;
 			children = (
+				1DBB604026F13115003249FE /* Extensions */,
 				1DF5051C264042EB00B78496 /* Manager */,
 				1D0AAE332639F31900CB44F5 /* Controller */,
 				1D0AAE322639F31300CB44F5 /* View */,
@@ -231,6 +234,14 @@
 				1DD05A96263C9AE0004D7C22 /* LocationTest.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1DBB604026F13115003249FE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1DBB604126F1312D003249FE /* String+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		1DF505132640420B00B78496 /* Manager */ = {
@@ -385,6 +396,7 @@
 				1DF5051E2640430000B78496 /* TaskManager.swift in Sources */,
 				1DA09F432639FA27006D0C80 /* Task.swift in Sources */,
 				1D0AAE032639F2E700CB44F5 /* TaskListViewController.swift in Sources */,
+				1DBB604226F1312D003249FE /* String+Extensions.swift in Sources */,
 				1DC10A4526545D0700C98E49 /* DataProvider.swift in Sources */,
 				1DBB603F26F12D74003249FE /* APIClient.swift in Sources */,
 				1DB290822655A92100B49B8B /* TaskCell.swift in Sources */,
