@@ -32,7 +32,11 @@ class APIClient {
         }
         
         urlSession.dataTask(with: url) { (data, response, error) in
-            
+            guard let data = data,
+                  let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : String]
+            else { fatalError() }
+            let token = dictionary["token"]
+            completionHandler(token, nil)
         }.resume()
     }
 }
