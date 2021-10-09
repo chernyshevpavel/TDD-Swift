@@ -16,8 +16,11 @@ class TaskListViewControllerTest: XCTestCase {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: String(describing: TaskListViewController.self))
         
+        UIApplication.shared.keyWindow?.rootViewController = sut
         sut = vc as? TaskListViewController
-        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+            window.rootViewController = sut
+            window.makeKeyAndVisible()
         sut.loadViewIfNeeded()
     }
 
@@ -41,5 +44,28 @@ class TaskListViewControllerTest: XCTestCase {
     
     func testWhevViewIsLoadedTableViewDelegeteEqualsTableViewDataSource() {
         XCTAssertEqual(sut.tableView.delegate as? DataProvider, sut.tableView.dataSource as? DataProvider)
+    }
+    
+    func testTaskListVCHasAddBarButtonWithSelfAsTarget() {
+        let target = sut.navigationItem.rightBarButtonItem?.target
+        XCTAssertEqual(target as? TaskListViewController, sut)
+    }
+    
+    func testAddNewTaskPresentsNewTaskViewController() {
+        XCTAssertNil(sut.presentedViewController)
+        guard let newTaskButton = sut.navigationItem.rightBarButtonItem,
+              let action = newTaskButton.action
+        else {
+            XCTFail()
+            return
+        }
+        
+        sut.performSelector(onMainThread: action, with: newTaskButton, waitUntilDone: true)
+        XCTAssertNotNil(sut.presentedViewController)
+        XCTAssertTrue(sut.presentedViewController is NewTaskViewController)
+        
+        let newTaskViewController = sut.presentedViewController as! NewTaskViewController
+        XCTAssertNotNil(newTaskViewController.titleTextfield)
+        
     }
 }

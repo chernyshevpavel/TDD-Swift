@@ -152,7 +152,7 @@
 				1D1F1CE42652E89200ECAEAC /* Controller */,
 				1DF505132640420B00B78496 /* Manager */,
 				1DA09F502639FEBC006D0C80 /* Model */,
-				1D0AAE152639F2EA00CB44F5 /* ToDoAppTests.swift */,
+				1DFCBAE026FB104D0002795A /* Supporting files */,
 				1D0AAE172639F2EA00CB44F5 /* Info.plist */,
 			);
 			path = ToDoAppTests;
@@ -260,6 +260,14 @@
 				1DBB603E26F12D74003249FE /* APIClient.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		1DFCBAE026FB104D0002795A /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				1D0AAE152639F2EA00CB44F5 /* ToDoAppTests.swift */,
+			);
+			path = "Supporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
