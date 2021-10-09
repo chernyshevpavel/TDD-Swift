@@ -51,21 +51,32 @@ class TaskListViewControllerTest: XCTestCase {
         XCTAssertEqual(target as? TaskListViewController, sut)
     }
     
-    func testAddNewTaskPresentsNewTaskViewController() {
+    func pressAddTaskBarButton() -> NewTaskViewController {
         XCTAssertNil(sut.presentedViewController)
         guard let newTaskButton = sut.navigationItem.rightBarButtonItem,
               let action = newTaskButton.action
         else {
             XCTFail()
-            return
+            return NewTaskViewController()
         }
         
         sut.performSelector(onMainThread: action, with: newTaskButton, waitUntilDone: true)
         XCTAssertNotNil(sut.presentedViewController)
         XCTAssertTrue(sut.presentedViewController is NewTaskViewController)
         
-        let newTaskViewController = sut.presentedViewController as! NewTaskViewController
+        return sut.presentedViewController as! NewTaskViewController
+    }
+    
+    func testAddNewTaskPresentsNewTaskViewController() {
+        let newTaskViewController = pressAddTaskBarButton()
         XCTAssertNotNil(newTaskViewController.titleTextfield)
+    }
+    
+    func testSharesSameTaskManagerWithNewTaskVC() {
+        
+        let newTaskViewController = pressAddTaskBarButton()
+        XCTAssertNotNil(sut.dataProvider.taskManager)
+        XCTAssertTrue(newTaskViewController.taskManager === sut.dataProvider.taskManager)
         
     }
 }
