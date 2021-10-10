@@ -14,12 +14,14 @@ class DetailViewControllerTests: XCTestCase {
     var sut: DetailViewController!
 
     override func setUpWithError() throws {
+        try? super.setUpWithError()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         sut = storyboard.instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController
         sut.loadViewIfNeeded()
     }
 
     override func tearDownWithError() throws {
+        try? super.tearDownWithError()
         sut = nil
     }
     

@@ -15,12 +15,14 @@ class NewTaskViewControllerTests: XCTestCase {
     var placemark: MockCLPlacemark!
 
     override func setUpWithError() throws {
+        try? super.setUpWithError()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         sut = storyboard.instantiateViewController(identifier: String(describing: NewTaskViewController.self)) as? NewTaskViewController
         sut.loadViewIfNeeded()
     }
 
     override func tearDownWithError() throws {
+        try? super.tearDownWithError()
         sut = nil
     }
 
@@ -124,7 +126,10 @@ class NewTaskViewControllerTests: XCTestCase {
     func testSaveDismisesNewNaskViewController() {
         // given
         let mockNewTaskViewController = MockNewTaskViewController()
-
+        let mockGeocoder = MockCLGeocoder()
+        mockNewTaskViewController.geocoder = mockGeocoder
+        mockNewTaskViewController.taskManager = TaskManager()
+        
         mockNewTaskViewController.titleTextfield = UITextField()
         mockNewTaskViewController.titleTextfield.text = "Foo"
         mockNewTaskViewController.locationTextfield = UITextField()
@@ -132,19 +137,29 @@ class NewTaskViewControllerTests: XCTestCase {
         mockNewTaskViewController.dateTextfield = UITextField()
         mockNewTaskViewController.dateTextfield.text = "Baz"
         mockNewTaskViewController.addressTextfield = UITextField()
-        mockNewTaskViewController.addressTextfield.text = "Spb"
+        mockNewTaskViewController.addressTextfield.text = "Saint-Petersburg"
         mockNewTaskViewController.descriptionTextfield = UITextField()
         mockNewTaskViewController.descriptionTextfield.text = "01.02.21"
         
         mockNewTaskViewController.saveButton = UIButton()
         mockNewTaskViewController.cancelButton = UIButton()
-        
+    
         // when
-        
         mockNewTaskViewController.save()
         
-        // then
-        XCTAssertTrue(mockNewTaskViewController.isDismissed)
+        let coordinate = CLLocationCoordinate2D(latitude: 27.773083, longitude: -82.640205)
+    
+        placemark = MockCLPlacemark()
+        placemark.mockCoordinate = coordinate
+        mockGeocoder.completionHandler?([placemark], nil)
+        
+        let expect = expectation(description: "dismis")
+       
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            XCTAssertTrue(mockNewTaskViewController.isDismissed)
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 0.06, handler: nil)
     }
 }
 
