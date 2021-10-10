@@ -104,6 +104,33 @@ class TaskListViewControllerTest: XCTestCase {
         tableView?.delegate?.tableView!(tableView!, didSelectRowAt: IndexPath(row: 0, section: 0))
         waitForExpectations(timeout: 1, handler: nil)
     }
+    
+    func testSelectedCelNotificationPushesDetailVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let sut = storyboard.instantiateViewController(withIdentifier: String(describing: TaskListViewController.self)) as! TaskListViewController
+        
+        let mockNavigationController = MockNavigationController(rootViewController: sut)
+        UIApplication.shared.keyWindow?.rootViewController = mockNavigationController
+        
+        sut.loadViewIfNeeded()
+    
+        let task = Task(title: "Foo")
+        let task1 = Task(title: "Bar")
+        
+        sut.dataProvider.taskManager?.add(task: task)
+        sut.dataProvider.taskManager?.add(task: task1)
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DidSelectRow notification"), object: self, userInfo: ["task" : task1])
+        
+        guard let detailViewController = mockNavigationController.pushedViewController as? DetailViewController else {
+            XCTFail()
+            return
+        }
+            
+        detailViewController.loadViewIfNeeded()
+        XCTAssertNotNil(detailViewController.titleLabel)
+        XCTAssertTrue(detailViewController.task == task1)
+    }
 }
 
 extension TaskListViewControllerTest {
@@ -111,6 +138,17 @@ extension TaskListViewControllerTest {
         var isReloaded = false
         override func reloadData() {
             isReloaded = true
+        }
+    }
+}
+
+extension TaskListViewControllerTest {
+    class MockNavigationController: UINavigationController {
+        var pushedViewController: UIViewController?
+        
+        override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+            super.pushViewController(viewController, animated: animated)
+            pushedViewController = viewController
         }
     }
 }
