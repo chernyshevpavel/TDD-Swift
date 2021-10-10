@@ -13,6 +13,17 @@ struct Task: Equatable {
     var location: Location?
     private(set) var date = Date()
     
+    var dict: [String : Any] {
+        var dict: [String : Any] = [:]
+        dict["title"] = title
+        dict["description"] = description
+        dict["date"] = date
+        if let location = location {
+            dict["location"] = location.dict
+        }
+        return dict
+    }
+    
     static func == (lhs: Task, rhs: Task) -> Bool {
         let topDateBorder = lhs.date.addingTimeInterval(10)
         let bottomDateBorder = lhs.date.addingTimeInterval(-10)
