@@ -21,9 +21,9 @@ class APIClientTests: XCTestCase {
     }
 
     override func tearDown() {
-        super.tearDown()
         sut = nil
         mockURLSession = nil
+        super.tearDown()
     }
 
     func userLogin() {

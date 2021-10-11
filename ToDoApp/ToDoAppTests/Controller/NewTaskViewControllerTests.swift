@@ -20,10 +20,11 @@ class NewTaskViewControllerTests: XCTestCase {
         sut = storyboard.instantiateViewController(identifier: String(describing: NewTaskViewController.self)) as? NewTaskViewController
         sut.loadViewIfNeeded()
     }
-
-    override func tearDownWithError() throws {
-        try? super.tearDownWithError()
+    
+    override func tearDown() {
+        sut.taskManager?.removeAll()
         sut = nil
+        super.tearDown()
     }
 
     func testHasTitleTextField() {
@@ -55,6 +56,7 @@ class NewTaskViewControllerTests: XCTestCase {
     }
     
     func testSaveUsesGeocoderToConverCoordinateFromAddress() {
+        
         let df = DateFormatter()
         df.dateFormat = "dd.MM.yy"
         let date = df.date(from: "06.09.21")!
@@ -65,6 +67,7 @@ class NewTaskViewControllerTests: XCTestCase {
         sut.addressTextfield.text = "Saint-Petersburg"
         sut.descriptionTextfield.text = "Baz"
         sut.taskManager = TaskManager()
+        XCTAssertEqual(sut.taskManager.tasksCount, 0)
         
         let mockGeocoder = MockCLGeocoder()
         sut.geocoder = mockGeocoder
@@ -81,9 +84,12 @@ class NewTaskViewControllerTests: XCTestCase {
         mockGeocoder.completionHandler?([placemark], nil)
         let task = self.sut.taskManager.task(at: 0)
 
-        
-        XCTAssertEqual(task, generatedTask)
-        
+        let expect = expectation(description: "wait push")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            XCTAssertEqual(task, generatedTask)
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 0.1)
     }
     
     func testSaveButtonHasSaveMethod() {
@@ -129,7 +135,7 @@ class NewTaskViewControllerTests: XCTestCase {
         let mockGeocoder = MockCLGeocoder()
         mockNewTaskViewController.geocoder = mockGeocoder
         mockNewTaskViewController.taskManager = TaskManager()
-        
+
         mockNewTaskViewController.titleTextfield = UITextField()
         mockNewTaskViewController.titleTextfield.text = "Foo"
         mockNewTaskViewController.locationTextfield = UITextField()
@@ -140,23 +146,24 @@ class NewTaskViewControllerTests: XCTestCase {
         mockNewTaskViewController.addressTextfield.text = "Saint-Petersburg"
         mockNewTaskViewController.descriptionTextfield = UITextField()
         mockNewTaskViewController.descriptionTextfield.text = "01.02.21"
-        
+
         mockNewTaskViewController.saveButton = UIButton()
         mockNewTaskViewController.cancelButton = UIButton()
-    
+
         // when
         mockNewTaskViewController.save()
-        
+
         let coordinate = CLLocationCoordinate2D(latitude: 27.773083, longitude: -82.640205)
-    
+
         placemark = MockCLPlacemark()
         placemark.mockCoordinate = coordinate
         mockGeocoder.completionHandler?([placemark], nil)
-        
+
         let expect = expectation(description: "dismis")
-       
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             XCTAssertTrue(mockNewTaskViewController.isDismissed)
+            mockNewTaskViewController.taskManager?.removeAll()
             expect.fulfill()
         }
         waitForExpectations(timeout: 0.06, handler: nil)

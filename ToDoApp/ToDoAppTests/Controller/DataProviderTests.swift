@@ -19,6 +19,7 @@ class DataProviderTests: XCTestCase {
         try? super.setUpWithError()
         sut = DataProvider()
         sut.taskManager = TaskManager()
+        sut.taskManager?.removeAll()
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         controller = storyBoard.instantiateViewController(identifier: String(describing: TaskListViewController.self)) as TaskListViewController
@@ -30,10 +31,11 @@ class DataProviderTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        try? super.tearDownWithError()
+        sut.taskManager?.removeAll()
         sut = nil
         tableView = nil
         controller = nil
+        try? super.tearDownWithError()
     }
 
     func testNumberOfSectionsIsTwo() {

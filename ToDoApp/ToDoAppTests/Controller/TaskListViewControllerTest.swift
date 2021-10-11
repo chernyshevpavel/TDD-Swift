@@ -24,6 +24,12 @@ class TaskListViewControllerTest: XCTestCase {
             window.makeKeyAndVisible()
         sut.loadViewIfNeeded()
     }
+    
+    override func tearDown() {
+        sut.dataProvider?.taskManager?.removeAll()
+        sut = nil
+        super.tearDown()
+    }
 
     func testWhenViewIsLoadedTableViewNotNil() {
         XCTAssertNotNil(sut.tableView)

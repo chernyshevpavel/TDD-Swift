@@ -21,8 +21,8 @@ class DetailViewControllerTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        try? super.tearDownWithError()
         sut = nil
+        try? super.tearDownWithError()
     }
     
     func testHasTitleLabel() {
