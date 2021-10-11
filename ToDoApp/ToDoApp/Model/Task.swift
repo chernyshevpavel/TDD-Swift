@@ -12,6 +12,7 @@ struct Task: Equatable {
     var description: String?
     var location: Location?
     private(set) var date = Date()
+    var isDone = false
     
     var dict: [String : Any] {
         var dict: [String : Any] = [:]

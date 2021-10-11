@@ -16,6 +16,9 @@ class TaskListViewController: UIViewController {
     @IBAction func addNewTask(_ sender: UIBarButtonItem) {
         if let viewController = storyboard?.instantiateViewController(identifier: String(describing: NewTaskViewController.self)) as? NewTaskViewController {
             viewController.taskManager = taskManager
+            viewController.completion = { [weak self] in
+                self?.tableView.reloadData()
+            }
             present(viewController, animated: true, completion: nil)
         }
     }

@@ -14,6 +14,8 @@ class NewTaskViewController: UIViewController {
     var geocoder = CLGeocoder()
     var dateFormater: DateFormatter?
     
+    var completion: (() -> Void)?
+    
     @IBOutlet var titleTextfield: UITextField!
     @IBOutlet var locationTextfield: UITextField!
     @IBOutlet var dateTextfield: UITextField!
@@ -49,8 +51,13 @@ class NewTaskViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
+                completion?()
             }
         }
+    }
+    
+    @IBAction func cancle() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func getDefaultDateFormater() -> DateFormatter {
