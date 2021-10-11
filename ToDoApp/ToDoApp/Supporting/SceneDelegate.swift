@@ -16,7 +16,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        #if targetEnvironment(simulator)
+        if CommandLine.arguments.contains("--UITesting") {
+            resetState()
+        }
+        #endif
+        
         guard let _ = (scene as? UIWindowScene) else { return }
+    }
+    
+    private func resetState() {
+        guard
+            let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+            let url = URL(string: "\(documentPath)tasks.plist") else { return }
+        let fileManager = FileManager.default
+        try? fileManager.removeItem(at: url)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

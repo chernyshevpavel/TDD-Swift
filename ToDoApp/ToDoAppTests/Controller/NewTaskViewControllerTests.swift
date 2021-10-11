@@ -121,21 +121,23 @@ class NewTaskViewControllerTests: XCTestCase {
                 return
             }
             
-            XCTAssertEqual(lattitude, 27.773083)
-            XCTAssertEqual(longitude, -82.640205)
+            XCTAssertEqual(lattitude, 59.9342562)
+            XCTAssertEqual(longitude, 30.3351228)
             geocoderAnswer.fulfill()
         }
         
         waitForExpectations(timeout: 5, handler: nil)
     }
     
-    func testSaveDismisesNewNaskViewController() {
+    func testSaveDismisesNewTaskViewController() {
         // given
         let mockNewTaskViewController = MockNewTaskViewController()
         let mockGeocoder = MockCLGeocoder()
         mockNewTaskViewController.geocoder = mockGeocoder
         mockNewTaskViewController.taskManager = TaskManager()
-
+        mockNewTaskViewController.taskManager?.removeAll()
+        mockNewTaskViewController.taskManager?.removeSavedTasks()
+        
         mockNewTaskViewController.titleTextfield = UITextField()
         mockNewTaskViewController.titleTextfield.text = "Foo"
         mockNewTaskViewController.locationTextfield = UITextField()
@@ -166,7 +168,7 @@ class NewTaskViewControllerTests: XCTestCase {
             mockNewTaskViewController.taskManager?.removeAll()
             expect.fulfill()
         }
-        waitForExpectations(timeout: 0.06, handler: nil)
+        waitForExpectations(timeout: 0.5, handler: nil)
     }
 }
 

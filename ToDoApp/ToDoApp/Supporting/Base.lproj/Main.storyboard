@@ -47,6 +47,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mME-G1-hHB">
                                                     <rect key="frame" x="324" y="11.5" width="70" height="21"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="date"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="Esg-sN-yxc"/>
                                                     </constraints>
@@ -176,23 +177,25 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="tFU-c3-woL">
                                 <rect key="frame" x="82" y="94" width="250" height="362"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HlA-a9-9Oz">
+                                    <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="Title" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HlA-a9-9Oz">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="34"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="Title"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="8KZ-ww-mtz"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rwf-Ji-F3b">
+                                    <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="Location" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rwf-Ji-F3b">
                                         <rect key="frame" x="0.0" y="56" width="250" height="34"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="Location"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="m1Z-P7-MJU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z1y-sB-rUa">
+                                    <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="Description" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z1y-sB-rUa">
                                         <rect key="frame" x="0.0" y="112" width="250" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="T7N-sg-6Rq"/>
@@ -202,6 +205,7 @@
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GXR-O2-zn5">
                                         <rect key="frame" x="0.0" y="168" width="250" height="34"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="Date"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="P4T-om-dxI"/>
                                         </constraints>
@@ -210,6 +214,7 @@
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mJZ-KD-45A">
                                         <rect key="frame" x="0.0" y="224" width="250" height="34"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="Address"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="lU8-aZ-hGf"/>
                                         </constraints>
@@ -218,6 +223,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5E-tV-Z48">
                                         <rect key="frame" x="108" y="280" width="34" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="save"/>
                                         <state key="normal" title="Save"/>
                                         <connections>
                                             <action selector="save" destination="pWX-Sz-Yix" eventType="touchUpInside" id="yMo-OP-jWg"/>
@@ -235,6 +241,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tAP-0t-oOr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration" identifier="addTask"/>
                         <constraints>
                             <constraint firstItem="tFU-c3-woL" firstAttribute="top" secondItem="tAP-0t-oOr" secondAttribute="top" constant="50" id="BUX-qd-dE4"/>
                             <constraint firstItem="tFU-c3-woL" firstAttribute="centerX" secondItem="tAP-0t-oOr" secondAttribute="centerX" id="fJe-UW-GlZ"/>
